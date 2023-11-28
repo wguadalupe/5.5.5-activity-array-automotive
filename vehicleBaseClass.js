@@ -9,6 +9,7 @@ class Vehicle {
         this.mileage = mileage;
         this.started = false;
         this.numberOfWheels = 0;
+        this.fuel = 0;
     }
 
     start() {
@@ -30,7 +31,7 @@ class Vehicle {
                 this.stop();
             }
         } else {
-            alert("You need to start the engine first.");
+            console.log("You need to start the engine first.");
         }
     }
     decelerate() {
@@ -48,18 +49,19 @@ class Vehicle {
                 this.stop();
             }
         } else {
-            alert("You need to start the engine first.");
+            console.log("You need to start the engine first.");
         }
     }
     stop() {
         this.started = false;
+        this.speed = 0;
     }
 
     drive() {
-        accelerate();
+        this.accelerate();
     }
     brake() {
-        decelerate();
+        this.decelerate();
     }
 
     autoPark()
@@ -76,16 +78,82 @@ class Vehicle {
         if (this.numberOfWheels == 8 && 8 == wheels) {
             console.log(this.model + " " + this.make + " is a Truck");
         } else if (this.numberOfWheels == 4 && 4 == wheels) {
-            console.log(this.model + " " + this.make + " is a CAr");
+            console.log(this.model + " " + this.make + " is a Car");
         } else if (this.numberOfWheels == 2 && 2 == wheels) {
             console.log(this.model + " " + this.make + " is a Bike");
         } else {
             console.log("Unknown type of vehicle");
         }
     }
+
+
+    }
+
+
+class mercurySedan extends Vehicle {
+    constructor(maximumPassengers, passengers, numberOfWheels, maximumSpeed, fuel, scheduleService) {
+        super(make, model, year, color, mileage);
+        this.maximumPassengers = 5;
+        this.passengers = 0;
+        this.numberOfWheels = 4;
+        this.maximumSpeed = 160;
+        this.fuel = 10;
+        this.scheduleService = false;
+
+    }
+loadPassenger(num) {
+    if (this.passengers + num <= this.maximumPassengers) {
+        this.passengers += num;
+        return true;
+    } else {
+        return false;
+    }
+
 }
 
-//This exports things you want to use from this "module", more info in readme
-module.exports = {
-    Vehicle
+start() {
+    if (this.fuel > 0) {
+        this.started = true;
+        console.log("Engine started");
+    }
 }
+
+scheduleService(mileage) {
+    if (mileage > 30000) {
+        this.needsMaintenance = true;
+        console.log("Time for maintenance.");
+    }
+}
+}
+
+module.exports = {
+Vehicle,
+mercurySedan 
+};
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
